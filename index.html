@@ -3,124 +3,276 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><!-- Title of your store here --></title>
+    <title><!-- NOM DE VOTRE BOUTIQUE ICI --></title>
     <style>
-        /* Base page styling */
-        body { font-family: sans-serif; margin: 0; padding: 0; background-color: #f5f5f5; }
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --text-dark: #2d3436;
+            --bg-light: #f8f9fa;
+            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         
-        /* Header and Tab Navigation styling */
-        header { background-color: #333; color: white; padding: 20px; text-align: center; }
-        nav { background-color: #444; padding: 10px; text-align: center; }
-        nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; }
+        body { 
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; 
+            background-color: var(--bg-light); 
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        header { 
+            background: linear-gradient(135deg, var(--primary-color), #1a252f); 
+            color: white; 
+            padding: 40px 20px; 
+            text-align: center;
+        }
         
-        /* Container layout */
-        .container { max-width: 1000px; margin: 20px auto; padding: 20px; background: white; }
+        header h1 { font-size: 2.5rem; margin-bottom: 8px; }
+        header p { font-size: 1.1rem; opacity: 0.8; font-weight: 300; }
+
+        nav { 
+            background-color: white; 
+            padding: 0; 
+            text-align: center; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
         
-        /* Introduction section styling */
-        .intro-section { margin-bottom: 30px; font-style: italic; }
+        nav a { 
+            display: inline-block;
+            color: var(--primary-color); 
+            padding: 15px 25px;
+            text-decoration: none; 
+            font-weight: 600; 
+            transition: var(--transition);
+            border-bottom: 3px solid transparent;
+        }
         
-        /* 5-6 Product grid layout layout */
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-bottom: 40px; }
-        .product-card { border: 1px solid #ccc; padding: 15px; text-align: center; }
+        nav a:hover { 
+            color: var(--accent-color); 
+            border-bottom-color: var(--accent-color);
+        }
+
+        .container { 
+            max-width: 1100px; 
+            margin: 40px auto; 
+            padding: 0 20px; 
+        }
+
+        section {
+            background: white;
+            padding: 35px;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 40px;
+        }
+
+        section h2 {
+            font-size: 1.75rem;
+            color: var(--primary-color);
+            margin-bottom: 25px;
+        }
+
+        .intro-box { 
+            font-size: 1.15rem; 
+            color: #555; 
+            border-left: 4px solid var(--accent-color);
+            padding-left: 20px;
+        }
+
+        /* Responsive Product Grid */
+        .product-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 25px; 
+        }
+
+        .product-card { 
+            background: white;
+            border: 1px solid #eef2f3; 
+            padding: 20px; 
+            border-radius: 10px; 
+            text-align: center; 
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            height: 480px; /* Locked box size for layout consistency */
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+
+        .product-image-placeholder {
+            width: 100%;
+            height: 140px;
+            background-color: #eaeff2;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            /* Insert your <img src="..."> tag here inside your cards */
+        }
+
+        .product-card h3 { color: var(--primary-color); margin-bottom: 10px; }
+
+        /* Scrollable Description Container Panel */
+        .scrollable-description-panel {
+            flex-grow: 1;
+            overflow-y: auto; /* Activates vertical scroll bar when content overflows */
+            padding: 10px;
+            margin-bottom: 15px;
+            background-color: #fafbfc;
+            border: 1px dashed #d1d8e0;
+            border-radius: 6px;
+            text-align: left;
+            font-size: 0.9rem;
+            color: #555;
+            max-height: 120px; /* Limits size to guarantee interactive scrolling layout */
+        }
+
+        /* Custom scrollbar adjustments */
+        .scrollable-description-panel::-webkit-scrollbar { width: 6px; }
+        .scrollable-description-panel::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 3px; }
+
+        .product-card .colors { font-size: 0.85rem; font-weight: bold; color: #7f8c8d; margin-bottom: 10px; }
+        .product-card .price { color: #e74c3c; font-weight: 700; font-size: 1.3rem; margin-top: auto; }
+
+        /* Interactive Tools Interface Layout */
+        .interactive-tool { 
+            background: linear-gradient(to right, #f9fbfd, #f2f6fa);
+            border: 1px solid #e4eaf0;
+        }
+
+        .tool-ui-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        /* Footer Layout Structure */
+        footer { 
+            background-color: var(--primary-color); 
+            color: #bdc3c7; 
+            text-align: center; 
+            padding: 30px 20px; 
+            margin-top: 60px;
+            border-top: 4px solid var(--accent-color);
+        }
         
-        /* Tool section styling */
-        .interactive-tool { background-color: #eee; padding: 20px; border-radius: 5px; }
-        
-        /* Store info footer styling */
-        footer { background-color: #333; color: white; text-align: center; padding: 20px; margin-top: 40px; }
+        footer p { margin-bottom: 8px; }
     </style>
 </head>
 <body>
 
-    <!-- Header Block -->
     <header>
-        <h1><!-- Store Name Here --></h1>
-        <p><!-- Optional Tagline Here --></p>
+        <h1><!-- NOM DE LA BOUTIQUE ICI --></h1>
+        <p><!-- DEUXIÈME LIGNE EN-TÊTE FACULTATIVE --></p>
     </header>
 
-    <!-- Navigation Tabs (Required for Good Interface Organization) -->
     <nav>
         <a href="#accueil">Accueil</a>
         <a href="#produits">Nos Articles</a>
-        <a href="#outil">Calculateur</a>
+        <a href="#outil">Outil Interactif</a>
         <a href="#contact">Contact</a>
     </nav>
 
-    <!-- Main Website Content Wrapper -->
     <div class="container">
 
-        <!-- 1. Introduction Section (Requires 3 Lines of Text) -->
-        <section id="accueil" class="intro-section">
-            <h2>Bienvenue</h2>
-            <p>
-                <!-- Line 1 of your introduction -->
-                <!-- Line 2 of your introduction -->
-                <!-- Line 3 of your introduction -->
-            </p>
+        <!-- 1. INTRO BLOCK FRAME (Requires 3 lines of French text) -->
+        <section id="accueil">
+            <h2>Présentation</h2>
+            <div class="intro-box">
+                <!-- AJOUTEZ LA LIGNE 1 DE VOTRE INTRODUCTION ICI --><br>
+                <!-- AJOUTEZ LA LIGNE 2 DE VOTRE INTRODUCTION ICI --><br>
+                <!-- AJOUTEZ LA LIGNE 3 DE VOTRE INTRODUCTION ICI -->
+            </div>
         </section>
 
-        <!-- 2. Content Section (Display your 5-6 school items with prices, colors, descriptions) -->
+        <!-- 2. PRODUCTS SHOWCASE GRID FRAME (Requires 5-6 item cards) -->
         <section id="produits">
-            <h2>Nos Fournitures Scolaires</h2>
+            <h2>Articles Scolaires Disponibles</h2>
             <div class="product-grid">
                 
                 <!-- Product Card 1 -->
                 <div class="product-card">
-                    <!-- Image tag, Item Name heading, Description paragraph, Color choices, Price in Euros (€) -->
+                    <div class="product-image-placeholder"><!-- Placeholder pour Image 1 --></div>
+                    <h3><!-- Titre de l'article 1 --></h3>
+                    
+                    <!-- Scrollable description area -->
+                    <div class="scrollable-description-panel">
+                        <!-- Écrivez vos descriptions textuelles détaillées ici. -->
+                        <!-- Si le texte dépasse la boîte, un curseur de défilement interactif apparaîtra automatiquement. -->
+                    </div>
+
+                    <div class="colors"><!-- Options de couleurs ici --></div>
+                    <div class="price"><!-- Prix en Euros (€) ici --></div>
                 </div>
 
                 <!-- Product Card 2 -->
                 <div class="product-card">
-                    <!-- Item details here -->
+                    <div class="product-image-placeholder"></div>
+                    <h3><!-- Titre de l'article 2 --></h3>
+                    <div class="scrollable-description-panel"><!-- Descriptions --></div>
+                    <div class="colors"><!-- Couleurs --></div>
+                    <div class="price"><!-- Prix --></div>
                 </div>
 
                 <!-- Product Card 3 -->
                 <div class="product-card">
-                    <!-- Item details here -->
+                    <div class="product-image-placeholder"></div>
+                    <h3><!-- Titre de l'article 3 --></h3>
+                    <div class="scrollable-description-panel"><!-- Descriptions --></div>
+                    <div class="colors"><!-- Couleurs --></div>
+                    <div class="price"><!-- Prix --></div>
                 </div>
 
                 <!-- Product Card 4 -->
                 <div class="product-card">
-                    <!-- Item details here -->
+                    <div class="product-image-placeholder"></div>
+                    <h3><!-- Titre de l'article 4 --></h3>
+                    <div class="scrollable-description-panel"><!-- Descriptions --></div>
+                    <div class="colors"><!-- Couleurs --></div>
+                    <div class="price"><!-- Prix --></div>
                 </div>
 
                 <!-- Product Card 5 -->
                 <div class="product-card">
-                    <!-- Item details here -->
+                    <div class="product-image-placeholder"></div>
+                    <h3><!-- Titre de l'article 5 --></h3>
+                    <div class="scrollable-description-panel"><!-- Descriptions --></div>
+                    <div class="colors"><!-- Couleurs --></div>
+                    <div class="price"><!-- Prix --></div>
                 </div>
 
                 <!-- Optional Product Card 6 -->
                 <div class="product-card">
-                    <!-- Item details here -->
+                    <div class="product-image-placeholder"></div>
+                    <h3><!-- Titre de l'article 6 --></h3>
+                    <div class="scrollable-description-panel"><!-- Descriptions --></div>
+                    <div class="colors"><!-- Couleurs --></div>
+                    <div class="price"><!-- Prix --></div>
                 </div>
 
             </div>
         </section>
 
-        <!-- 3. Interactive Web Tool Section (Your custom feature) -->
+        <!-- 3. CUSTOM WEB TOOL SKELETON FRAME -->
         <section id="outil" class="interactive-tool">
-            <h2><!-- Tool Heading Here --></h2>
-            
-            <!-- Add your interactive form inputs, dropdown selectors, or buttons here -->
-
+            <h2>Espace Outil Métier</h2>
+            <div class="tool-ui-group">
+                <!-- Déposez vos balises de sélection (<select>), de saisie (<input>) ou vos boutons ici -->
+            </div>
         </section>
 
     </div>
 
-    <!-- 4. Mandatory Store Information Block (Requires exactly 2 lines of details) -->
+    <!-- 4. MANDATORY SHOP IDENTIFICATION BLOCK (Requires exactly 2 lines of details) -->
     <footer id="contact">
-        <p><!-- Line 1: Store Name, French Address, Phone Number, and Website URL --></p>
-        <p><!-- Line 2: Copyright or supporting footer detail --></p>
-    </footer>
-
-    <!-- Native JavaScript Block for your Interactive Tool Logic -->
-    <script>
-        // Write your custom math calculation or functional script logic here
-        function runMyCustomTool() {
-            // Your custom formula here
-        }
-    </script>
-
-</body>
-</html>
-
+        <p><!-- LIGNE 1 : Nom de la boutique, adresse physique en France, numéro de téléphone et URL du site web --></p>
+        <p><!-- LIGNE 2 : Complément d'information exigé par la consigne --></p>
