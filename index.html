@@ -3,276 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><!-- NOM DE VOTRE BOUTIQUE ICI --></title>
+    <title><!-- Add Store Title Here --></title>
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --accent-color: #3498db;
-            --text-dark: #2d3436;
-            --bg-light: #f8f9fa;
-            --card-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            --transition: all 0.3s ease;
+            --navy-primary: #2c3e50;
+            --blue-accent: #3498db;
+            --charcoal-text: #2d3436;
+            --light-bg: #f8f9fa;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--light-bg); color: var(--charcoal-text); line-height: 1.6; }
         
-        body { 
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; 
-            background-color: var(--bg-light); 
-            color: var(--text-dark);
-            line-height: 1.6;
-        }
-
-        header { 
-            background: linear-gradient(135deg, var(--primary-color), #1a252f); 
-            color: white; 
-            padding: 40px 20px; 
-            text-align: center;
-        }
+        header { background: var(--navy-primary); color: white; padding: 30px; text-align: center; }
         
-        header h1 { font-size: 2.5rem; margin-bottom: 8px; }
-        header p { font-size: 1.1rem; opacity: 0.8; font-weight: 300; }
-
-        nav { 
-            background-color: white; 
-            padding: 0; 
-            text-align: center; 
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
+        /* Navigation Tabs Interface */
+        nav { background: white; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+        nav a { display: inline-block; color: var(--navy-primary); padding: 15px 20px; text-decoration: none; font-weight: bold; }
         
-        nav a { 
-            display: inline-block;
-            color: var(--primary-color); 
-            padding: 15px 25px;
-            text-decoration: none; 
-            font-weight: 600; 
-            transition: var(--transition);
-            border-bottom: 3px solid transparent;
-        }
+        .container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
+        section { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); margin-bottom: 30px; }
+        h2 { color: var(--navy-primary); margin-bottom: 20px; padding-bottom: 5px; border-bottom: 2px solid var(--blue-accent); }
         
-        nav a:hover { 
-            color: var(--accent-color); 
-            border-bottom-color: var(--accent-color);
-        }
+        /* 3-Line Intro formatting */
+        .intro-text { font-size: 1.1rem; line-height: 1.8; color: #444; }
 
-        .container { 
-            max-width: 1100px; 
-            margin: 40px auto; 
-            padding: 0 20px; 
-        }
-
-        section {
-            background: white;
-            padding: 35px;
-            border-radius: 12px;
-            box-shadow: var(--card-shadow);
-            margin-bottom: 40px;
-        }
-
-        section h2 {
-            font-size: 1.75rem;
-            color: var(--primary-color);
-            margin-bottom: 25px;
-        }
-
-        .intro-box { 
-            font-size: 1.15rem; 
-            color: #555; 
-            border-left: 4px solid var(--accent-color);
-            padding-left: 20px;
-        }
-
-        /* Responsive Product Grid */
-        .product-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-            gap: 25px; 
-        }
-
-        .product-card { 
-            background: white;
-            border: 1px solid #eef2f3; 
-            padding: 20px; 
-            border-radius: 10px; 
-            text-align: center; 
-            transition: var(--transition);
-            display: flex;
-            flex-direction: column;
-            height: 480px; /* Locked box size for layout consistency */
-        }
-
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-        }
-
-        .product-image-placeholder {
-            width: 100%;
-            height: 140px;
-            background-color: #eaeff2;
-            border-radius: 6px;
-            margin-bottom: 15px;
-            /* Insert your <img src="..."> tag here inside your cards */
-        }
-
-        .product-card h3 { color: var(--primary-color); margin-bottom: 10px; }
-
-        /* Scrollable Description Container Panel */
-        .scrollable-description-panel {
-            flex-grow: 1;
-            overflow-y: auto; /* Activates vertical scroll bar when content overflows */
-            padding: 10px;
-            margin-bottom: 15px;
-            background-color: #fafbfc;
-            border: 1px dashed #d1d8e0;
-            border-radius: 6px;
+        /* 5-6 Grid Layout */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .card { border: 1px solid #eef2f3; padding: 20px; border-radius: 8px; text-align: center; background: #fff; }
+        
+        /* Scrollable Description Window */
+        .scroll-window { 
+            height: 130px; 
+            overflow-y: auto; 
+            margin: 15px 0; 
+            padding: 10px; 
+            background: #fdfdfd; 
+            border: 1px dashed #cbd5e1; 
             text-align: left;
-            font-size: 0.9rem;
-            color: #555;
-            max-height: 120px; /* Limits size to guarantee interactive scrolling layout */
-        }
-
-        /* Custom scrollbar adjustments */
-        .scrollable-description-panel::-webkit-scrollbar { width: 6px; }
-        .scrollable-description-panel::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 3px; }
-
-        .product-card .colors { font-size: 0.85rem; font-weight: bold; color: #7f8c8d; margin-bottom: 10px; }
-        .product-card .price { color: #e74c3c; font-weight: 700; font-size: 1.3rem; margin-top: auto; }
-
-        /* Interactive Tools Interface Layout */
-        .interactive-tool { 
-            background: linear-gradient(to right, #f9fbfd, #f2f6fa);
-            border: 1px solid #e4eaf0;
-        }
-
-        .tool-ui-group {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        /* Footer Layout Structure */
-        footer { 
-            background-color: var(--primary-color); 
-            color: #bdc3c7; 
-            text-align: center; 
-            padding: 30px 20px; 
-            margin-top: 60px;
-            border-top: 4px solid var(--accent-color);
+            font-size: 0.95rem;
         }
         
-        footer p { margin-bottom: 8px; }
+        .item-price { color: #e74c3c; font-weight: bold; font-size: 1.25rem; margin-top: 10px; }
+        
+        /* Tools Layout Wrapper */
+        .tool-box { background: #f1f5f9; padding: 20px; border-radius: 6px; border: 1px solid #e2e8f0; }
+
+        /* Footer line constraints */
+        footer { background: var(--navy-primary); color: #e2e8f0; text-align: center; padding: 25px; margin-top: 50px; font-size: 1rem; }
+        footer p { margin: 4px 0; }
     </style>
 </head>
 <body>
 
+    <!-- Store Header Banner -->
     <header>
-        <h1><!-- NOM DE LA BOUTIQUE ICI --></h1>
-        <p><!-- DEUXIÈME LIGNE EN-TÊTE FACULTATIVE --></p>
+        <h1><!-- Headings and Store Branding Here --></h1>
     </header>
 
+    <!-- Required Interface Tabs Navigation -->
     <nav>
         <a href="#accueil">Accueil</a>
-        <a href="#produits">Nos Articles</a>
-        <a href="#outil">Outil Interactif</a>
-        <a href="#contact">Contact</a>
+        <a href="#articles">Nos Articles</a>
+        <a href="#outils">Calculateur</a>
+        <a href="#contact">Contact & Magasin</a>
     </nav>
 
     <div class="container">
 
-        <!-- 1. INTRO BLOCK FRAME (Requires 3 lines of French text) -->
+        <!-- 1. INTRODUCTION (Must fill out exactly 3 lines of French text) -->
         <section id="accueil">
-            <h2>Présentation</h2>
-            <div class="intro-box">
-                <!-- AJOUTEZ LA LIGNE 1 DE VOTRE INTRODUCTION ICI --><br>
-                <!-- AJOUTEZ LA LIGNE 2 DE VOTRE INTRODUCTION ICI --><br>
-                <!-- AJOUTEZ LA LIGNE 3 DE VOTRE INTRODUCTION ICI -->
-            </div>
+            <h2>Présentation de la Boutique</h2>
+            <p class="intro-text">
+                <!-- Rédigez ici la LIGNE 1 de votre paragraphe d'introduction --><br>
+                <!-- Rédigez ici la LIGNE 2 de votre paragraphe d'introduction --><br>
+                <!-- Rédigez ici la LIGNE 3 de votre paragraphe d'introduction -->
+            </p>
         </section>
 
-        <!-- 2. PRODUCTS SHOWCASE GRID FRAME (Requires 5-6 item cards) -->
-        <section id="produits">
-            <h2>Articles Scolaires Disponibles</h2>
-            <div class="product-grid">
+        <!-- 2. CONTENT SHOWCASE (5-6 School Supplies cards) -->
+        <section id="articles">
+            <h2>Articles disponibles en France</h2>
+            <div class="grid">
                 
-                <!-- Product Card 1 -->
-                <div class="product-card">
-                    <div class="product-image-placeholder"><!-- Placeholder pour Image 1 --></div>
-                    <h3><!-- Titre de l'article 1 --></h3>
+                <!-- Item Card 1 (Ensure total item content equals roughly 10 lines of details) -->
+                <div class="card">
+                    <h3><!-- Item Name Heading --></h3>
                     
-                    <!-- Scrollable description area -->
-                    <div class="scrollable-description-panel">
-                        <!-- Écrivez vos descriptions textuelles détaillées ici. -->
-                        <!-- Si le texte dépasse la boîte, un curseur de défilement interactif apparaîtra automatiquement. -->
+                    <!-- Scrollable text window for descriptions and color variations -->
+                    <div class="scroll-window">
+                        <!-- Write your descriptions here line by line -->
+                        <!-- Include color choices inside this space -->
+                        <!-- Ensure it displays your French text neatly -->
                     </div>
-
-                    <div class="colors"><!-- Options de couleurs ici --></div>
-                    <div class="price"><!-- Prix en Euros (€) ici --></div>
+                    
+                    <div class="item-price"><!-- Price in Euros (€) --></div>
                 </div>
 
-                <!-- Product Card 2 -->
-                <div class="product-card">
-                    <div class="product-image-placeholder"></div>
-                    <h3><!-- Titre de l'article 2 --></h3>
-                    <div class="scrollable-description-panel"><!-- Descriptions --></div>
-                    <div class="colors"><!-- Couleurs --></div>
-                    <div class="price"><!-- Prix --></div>
+                <!-- Item Card 2 -->
+                <div class="card">
+                    <h3><!-- Item Name Heading --></h3>
+                    <div class="scroll-window"><!-- Descriptions & Colors --></div>
+                    <div class="item-price"><!-- Price --></div>
                 </div>
 
-                <!-- Product Card 3 -->
-                <div class="product-card">
-                    <div class="product-image-placeholder"></div>
-                    <h3><!-- Titre de l'article 3 --></h3>
-                    <div class="scrollable-description-panel"><!-- Descriptions --></div>
-                    <div class="colors"><!-- Couleurs --></div>
-                    <div class="price"><!-- Prix --></div>
+                <!-- Item Card 3 -->
+                <div class="card">
+                    <h3><!-- Item Name Heading --></h3>
+                    <div class="scroll-window"><!-- Descriptions & Colors --></div>
+                    <div class="item-price"><!-- Price --></div>
                 </div>
 
-                <!-- Product Card 4 -->
-                <div class="product-card">
-                    <div class="product-image-placeholder"></div>
-                    <h3><!-- Titre de l'article 4 --></h3>
-                    <div class="scrollable-description-panel"><!-- Descriptions --></div>
-                    <div class="colors"><!-- Couleurs --></div>
-                    <div class="price"><!-- Prix --></div>
+                <!-- Item Card 4 -->
+                <div class="card">
+                    <h3><!-- Item Name Heading --></h3>
+                    <div class="scroll-window"><!-- Descriptions & Colors --></div>
+                    <div class="item-price"><!-- Price --></div>
                 </div>
 
-                <!-- Product Card 5 -->
-                <div class="product-card">
-                    <div class="product-image-placeholder"></div>
-                    <h3><!-- Titre de l'article 5 --></h3>
-                    <div class="scrollable-description-panel"><!-- Descriptions --></div>
-                    <div class="colors"><!-- Couleurs --></div>
-                    <div class="price"><!-- Prix --></div>
+                <!-- Item Card 5 -->
+                <div class="card">
+                    <h3><!-- Item Name Heading --></h3>
+                    <div class="scroll-window"><!-- Descriptions & Colors --></div>
+                    <div class="item-price"><!-- Price --></div>
                 </div>
 
-                <!-- Optional Product Card 6 -->
-                <div class="product-card">
-                    <div class="product-image-placeholder"></div>
-                    <h3><!-- Titre de l'article 6 --></h3>
-                    <div class="scrollable-description-panel"><!-- Descriptions --></div>
-                    <div class="colors"><!-- Couleurs --></div>
-                    <div class="price"><!-- Prix --></div>
+                <!-- Optional Item Card 6 -->
+                <div class="card">
+                    <h3><!-- Item Name Heading --></h3>
+                    <div class="scroll-window"><!-- Descriptions & Colors --></div>
+                    <div class="item-price"><!-- Price --></div>
                 </div>
 
             </div>
         </section>
 
-        <!-- 3. CUSTOM WEB TOOL SKELETON FRAME -->
-        <section id="outil" class="interactive-tool">
-            <h2>Espace Outil Métier</h2>
-            <div class="tool-ui-group">
-                <!-- Déposez vos balises de sélection (<select>), de saisie (<input>) ou vos boutons ici -->
-            </div>
+        <!-- 3. INTERACTIVE WEB TOOLS SKELETON -->
+        <section id="outils" class="tool-box">
+            <h2>Outil de Gestion Scolaire</h2>
+            
+            <!-- Construct your manual dropdown menus (<select>) or pricing calculations right here -->
+
         </section>
 
     </div>
 
-    <!-- 4. MANDATORY SHOP IDENTIFICATION BLOCK (Requires exactly 2 lines of details) -->
+    <!-- 4. MANDATORY IDENTIFICATION INFORMATION (Strictly 2 lines total) -->
     <footer id="contact">
-        <p><!-- LIGNE 1 : Nom de la boutique, adresse physique en France, numéro de téléphone et URL du site web --></p>
-        <p><!-- LIGNE 2 : Complément d'information exigé par la consigne --></p>
+        <p><strong><!-- Line 1: Put Store Name, French Address, Phone Number, and URL here --></strong></p>
+        <p><!-- Line 2: Put closing information or support notes here --></p>
+    </footer>
+
+    <!-- Script bracket for your native JavaScript tools -->
+    <script>
+        function calculateStoreBudget() {
+            // Write your manual, non-AI conversion or math algorithms right here
+        }
+    </script>
+
+</body>
+</html>
