@@ -3,163 +3,268 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><!-- Add Store Title Here --></title>
+    <title>Magasin Français — Fournitures Scolaires</title>
     <style>
         :root {
-            --navy-primary: #2c3e50;
-            --blue-accent: #3498db;
-            --charcoal-text: #2d3436;
-            --light-bg: #f8f9fa;
+            --primary-slate: #1e272e;
+            --accent-blue: #3498db;
+            --text-dark: #2c3e50;
+            --bg-light: #f1f2f6;
+            --scroll-panel-bg: #f8f9fa;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Segoe UI', sans-serif; background-color: var(--light-bg); color: var(--charcoal-text); line-height: 1.6; }
         
-        header { background: var(--navy-primary); color: white; padding: 30px; text-align: center; }
-        
-        /* Navigation Tabs Interface */
-        nav { background: white; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
-        nav a { display: inline-block; color: var(--navy-primary); padding: 15px 20px; text-decoration: none; font-weight: bold; }
-        
-        .container { max-width: 1000px; margin: 30px auto; padding: 0 20px; }
-        section { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.03); margin-bottom: 30px; }
-        h2 { color: var(--navy-primary); margin-bottom: 20px; padding-bottom: 5px; border-bottom: 2px solid var(--blue-accent); }
-        
-        /* 3-Line Intro formatting */
-        .intro-text { font-size: 1.1rem; line-height: 1.8; color: #444; }
+        body { 
+            font-family: 'Segoe UI', system-ui, sans-serif; 
+            background-color: var(--bg-light); 
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
 
-        /* 5-6 Grid Layout */
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .card { border: 1px solid #eef2f3; padding: 20px; border-radius: 8px; text-align: center; background: #fff; }
-        
-        /* Scrollable Description Window */
-        .scroll-window { 
-            height: 130px; 
-            overflow-y: auto; 
-            margin: 15px 0; 
-            padding: 10px; 
-            background: #fdfdfd; 
-            border: 1px dashed #cbd5e1; 
-            text-align: left;
-            font-size: 0.95rem;
+        /* Title Area Container */
+        header { 
+            background: linear-gradient(135deg, var(--primary-slate), #0f1418); 
+            color: white; 
+            padding: 50px 20px; 
+            text-align: center;
+            border-bottom: 4px solid var(--accent-blue);
         }
         
-        .item-price { color: #e74c3c; font-weight: bold; font-size: 1.25rem; margin-top: 10px; }
-        
-        /* Tools Layout Wrapper */
-        .tool-box { background: #f1f5f9; padding: 20px; border-radius: 6px; border: 1px solid #e2e8f0; }
+        header h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
+        header p { font-size: 1.1rem; opacity: 0.85; font-weight: 300; }
 
-        /* Footer line constraints */
-        footer { background: var(--navy-primary); color: #e2e8f0; text-align: center; padding: 25px; margin-top: 50px; font-size: 1rem; }
-        footer p { margin: 4px 0; }
+        .container { 
+            max-width: 1140px; 
+            margin: 40px auto; 
+            padding: 0 24px; 
+        }
+
+        section {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 25px rgba(30, 39, 46, 0.05);
+        }
+
+        section h2 {
+            font-size: 1.75rem;
+            color: var(--primary-slate);
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 45px;
+            height: 4px;
+            background-color: var(--accent-blue);
+            border-radius: 2px;
+        }
+
+        /* Welcome Area Info Box (3 Lines Required) */
+        .welcome-info-box { 
+            font-size: 1.15rem; 
+            color: #475569; 
+            line-height: 1.9;
+            border-left: 5px solid var(--accent-blue);
+            padding-left: 24px;
+        }
+
+        /* Responsive Grid Layout */
+        .product-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); 
+            gap: 30px; 
+        }
+
+        .product-card { 
+            background: white;
+            border: 1px solid #e2e8f0; 
+            padding: 24px; 
+            border-radius: 14px; 
+            text-align: center; 
+            display: flex;
+            flex-direction: column;
+            height: 480px; /* Locked height structure for neat grid rows */
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(30, 39, 46, 0.1);
+        }
+
+        /* Container designed to fit your uploaded images nicely */
+        .item-image-container {
+            width: 100%;
+            height: 150px;
+            background-color: #e2e8f0;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Forces your images to scale cleanly without stretching */
+        .item-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; 
+        }
+
+        .product-card h3 { color: var(--primary-slate); margin-bottom: 12px; }
+
+        /* Scrollable Description Box Space */
+        .scrollable-description {
+            flex-grow: 1;
+            overflow-y: auto; 
+            padding: 12px;
+            margin-bottom: 15px;
+            background-color: var(--scroll-panel-bg);
+            border: 1px dashed #cbd5e1;
+            border-radius: 8px;
+            text-align: left;
+            font-size: 0.95rem;
+            max-height: 120px;
+        }
+
+        .scrollable-description::-webkit-scrollbar { width: 5px; }
+        .scrollable-description::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 4px; }
+
+        .product-card .colors { font-size: 0.85rem; font-weight: 700; color: #94a3b8; margin-bottom: 10px; }
+        .product-card .price { color: #e74c3c; font-weight: 700; font-size: 1.4rem; margin-top: auto; }
+
+        /* Footer Store Details (Exactly 2 Lines Required) */
+        footer { 
+            background-color: var(--primary-slate); 
+            color: #94a3b8; 
+            text-align: center; 
+            padding: 35px 20px; 
+            margin-top: 60px;
+            border-top: 5px solid var(--accent-blue);
+        }
+        footer p { margin-bottom: 6px; }
     </style>
 </head>
 <body>
 
-    <!-- Store Header Banner -->
+    <!-- Title and Subtitle -->
     <header>
-        <h1><!-- Headings and Store Branding Here --></h1>
+        <h1>Magasin Français</h1>
+        <p>Votre papeterie de confiance pour la rentrée scolaire</p>
     </header>
-
-    <!-- Required Interface Tabs Navigation -->
-    <nav>
-        <a href="#accueil">Accueil</a>
-        <a href="#articles">Nos Articles</a>
-        <a href="#outils">Calculateur</a>
-        <a href="#contact">Contact & Magasin</a>
-    </nav>
 
     <div class="container">
 
-        <!-- 1. INTRODUCTION (Must fill out exactly 3 lines of French text) -->
-        <section id="accueil">
-            <h2>Présentation de la Boutique</h2>
-            <p class="intro-text">
-                <!-- Rédigez ici la LIGNE 1 de votre paragraphe d'introduction --><br>
-                <!-- Rédigez ici la LIGNE 2 de votre paragraphe d'introduction --><br>
-                <!-- Rédigez ici la LIGNE 3 de votre paragraphe d'introduction -->
-            </p>
-        </section>
-
-        <!-- 2. CONTENT SHOWCASE (5-6 School Supplies cards) -->
-        <section id="articles">
-            <h2>Articles disponibles en France</h2>
-            <div class="grid">
-                
-                <!-- Item Card 1 (Ensure total item content equals roughly 10 lines of details) -->
-                <div class="card">
-                    <h3><!-- Item Name Heading --></h3>
-                    
-                    <!-- Scrollable text window for descriptions and color variations -->
-                    <div class="scroll-window">
-                        <!-- Write your descriptions here line by line -->
-                        <!-- Include color choices inside this space -->
-                        <!-- Ensure it displays your French text neatly -->
-                    </div>
-                    
-                    <div class="item-price"><!-- Price in Euros (€) --></div>
-                </div>
-
-                <!-- Item Card 2 -->
-                <div class="card">
-                    <h3><!-- Item Name Heading --></h3>
-                    <div class="scroll-window"><!-- Descriptions & Colors --></div>
-                    <div class="item-price"><!-- Price --></div>
-                </div>
-
-                <!-- Item Card 3 -->
-                <div class="card">
-                    <h3><!-- Item Name Heading --></h3>
-                    <div class="scroll-window"><!-- Descriptions & Colors --></div>
-                    <div class="item-price"><!-- Price --></div>
-                </div>
-
-                <!-- Item Card 4 -->
-                <div class="card">
-                    <h3><!-- Item Name Heading --></h3>
-                    <div class="scroll-window"><!-- Descriptions & Colors --></div>
-                    <div class="item-price"><!-- Price --></div>
-                </div>
-
-                <!-- Item Card 5 -->
-                <div class="card">
-                    <h3><!-- Item Name Heading --></h3>
-                    <div class="scroll-window"><!-- Descriptions & Colors --></div>
-                    <div class="item-price"><!-- Price --></div>
-                </div>
-
-                <!-- Optional Item Card 6 -->
-                <div class="card">
-                    <h3><!-- Item Name Heading --></h3>
-                    <div class="scroll-window"><!-- Descriptions & Colors --></div>
-                    <div class="item-price"><!-- Price --></div>
-                </div>
-
+        <!-- Dedicated Welcome Area for Information -->
+        <section id="welcome">
+            <h2>Bienvenue</h2>
+            <div class="welcome-info-box">
+                Welcome to the most trustworthy french school store!<br>
+                Here you can find a bunch of cultural items like the Bic cristial pen!<br>
+                Look down below to see our options:
             </div>
         </section>
 
-        <!-- 3. INTERACTIVE WEB TOOLS SKELETON -->
-        <section id="outils" class="tool-box">
-            <h2>Outil de Gestion Scolaire</h2>
-            
-            <!-- Construct your manual dropdown menus (<select>) or pricing calculations right here -->
+        <!-- Item and Description Section Grid -->
+        <section id="items">
+            <h2>Nos Articles</h2>
+            <div class="product-grid">
+                
+                <!-- Card 1 -->
+                <div class="product-card">
+                    <div class="item-image-container">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAaiDLhNaRm7NTNezlIAaYtcQVsW_t_7Z68GM1EY342Q&s=10" alt="Le Bic Cristal">
+                    </div>
+                    <h3>Le Bic Cristal</h3>
+                    <div class="scrollable-description">
+                        The Bic Cristal pens, a very cultural and famous item, that isn't just good culturally, but also writes very well for a long time!
+                    </div>
+                    <div class="colors">
+                        Couleurs : 
+                        &bull; <span style="color: #2980b9;">Bleu</span> 
+                        &bull; <span style="color: #2d3436;">Noir</span> 
+                        &bull; <span style="color: #e74c3c;">Rouge</span> 
+                        &bull; <span style="color: #27ae60;">Vert</span>
+                    </div>
+                    <div class="price">1,99 €</div>
+                </div>
 
-        </section>
-
+              <!-- Card 2 -->
+<div class="product-card">
+    <div class="item-image-container">
+        <img src="pen.png" alt="Eiffel tower pen">
     </div>
+    <h3>Eiffel tower pen</h3>
+    <div class="scrollable-description">
+        This pen comes with a cool little eiffel tower design on it, that paris fans are sure to love!
+    </div>
+    <div class="colors">
+        Couleurs: 
+        &bull; <span style="color: black;">Black</span> 
+        &bull; <span style="color: blue;">Blue</span> 
+        &bull; <span style="color: pink;">Pink</span>
+    </div>
+    <div class="price">1,20 €/pen</div>
+</div>
 
-    <!-- 4. MANDATORY IDENTIFICATION INFORMATION (Strictly 2 lines total) -->
-    <footer id="contact">
-        <p><strong><!-- Line 1: Put Store Name, French Address, Phone Number, and URL here --></strong></p>
-        <p><!-- Line 2: Put closing information or support notes here --></p>
-    </footer>
 
-    <!-- Script bracket for your native JavaScript tools -->
-    <script>
-        function calculateStoreBudget() {
-            // Write your manual, non-AI conversion or math algorithms right here
-        }
-    </script>
 
-</body>
-</html>
+                <!-- Card 3 -->
+               <div class="product-card">
+    <div class="item-image-container">
+        <img src="ruler.png" alt="croissant ruler">
+    </div>
+    <h3>Croissant ruler</h3>
+    <div class="scrollable-description">
+        A ruler with a croissant on it! dont try eating it though...
+    </div>
+    <div class="colors">
+        Couleurs : <span style="color: rgba(0, 0, 0, 0.25); font-weight: bold; text-shadow: 0 0 1px rgba(0,0,0,0.1);">Transparent</span>
+    </div>
+    <div class="price">0,85 €</div>
+</div>
+
+
+  <!-- Card 4 -->
+<div class="product-card">
+    <div class="item-image-container">
+        <img src="binder.png" alt="Louvre binder">
+    </div>
+    <h3>Louvre binder</h3>
+    <div class="scrollable-description">
+        A binder with the louvre on it. This one is sure to make your french teacher proud!
+    </div>
+    <div class="colors">
+        Couleurs: 
+        &bull; <span style="color: black;">Black</span> 
+        &bull; <span style="color: blue;">Blue</span> 
+        &bull; <span style="color: red;">Red</span>
+	&bull; <span style="color: green;">Green</span>
+    </div>
+    <div class="price">5,50 €</div>
+</div>
+
+
+
+                <!-- Card 5 -->
+                <div class="product-card">
+                    <div class="item-image-container">
+                        <img src="eraser.png" alt="Arc de Triomphe eraser">
+                    </div>
+                    <h3>Arc de Triomphe eraser</h3>
+                    <div class="scrollable-description">
+                       An eraser with the Arc de Triomphe on it.
+                    </div>
+                    <div class="colors">Couleurs : Normal</div>
+                    <div class="price">0,80 €</div>
+                </div>
+
